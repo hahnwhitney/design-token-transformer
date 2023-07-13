@@ -46,28 +46,13 @@ const StyleDictionaryExtended = StyleDictionary.extend({
   ...deepMerge.all([androidConfig, webConfig]),
   source: ["tokens/*.json"],
   platforms: {
-    scss: {
-      transformGroup: "custom/css",
-      buildPath: "build/scss/",
-      files: [
-        {
-          destination: "_variables.scss",
-          format: "scss/variables",
-          filter: "validToken",
-        },
-      ],
-    },
-    less: {
-      transformGroup: "custom/css",
-      buildPath: "build/less/",
-      files: [
-        {
-          destination: "_variables.less",
-          format: "less/variables",
-          filter: "validToken",
-        },
-      ],
-    },
+    // For now, we're only exporting our tokens as vanilla CSS;
+    // we can easily add back SCSS, LESS, JSON, iOS, Android, etc.
+    // in the future if they become necessary.
+
+    // FastStore uses SCSS, but because variables follow CSS custom
+    // property (aka, variable) syntax instead of SCSS variable syntax,
+    // we export a _variables.css file.
     css: {
       transformGroup: "custom/css",
       buildPath: "build/css/",
@@ -78,83 +63,6 @@ const StyleDictionaryExtended = StyleDictionary.extend({
           filter: "validToken",
           options: {
             showFileHeader: false,
-          },
-        },
-      ],
-    },
-    "json-flat": {
-      transformGroup: "js",
-      buildPath: "build/json/",
-      files: [
-        {
-          destination: "styles.json",
-          format: "json/flat",
-          filter: "validToken",
-        },
-      ],
-    },
-    ios: {
-      transformGroup: "ios",
-      buildPath: "build/ios/",
-      files: [
-        {
-          destination: "StyleDictionaryColor.h",
-          format: "ios/colors.h",
-          className: "StyleDictionaryColor",
-          type: "StyleDictionaryColorName",
-          filter: {
-            type: "color",
-          },
-        },
-        {
-          destination: "StyleDictionaryColor.m",
-          format: "ios/colors.m",
-          className: "StyleDictionaryColor",
-          type: "StyleDictionaryColorName",
-          filter: {
-            type: "color",
-          },
-        },
-        {
-          destination: "StyleDictionarySize.h",
-          format: "ios/static.h",
-          className: "StyleDictionarySize",
-          type: "float",
-          filter: {
-            type: "number",
-          },
-        },
-        {
-          destination: "StyleDictionarySize.m",
-          format: "ios/static.m",
-          className: "StyleDictionarySize",
-          type: "float",
-          filter: {
-            type: "number",
-          },
-        },
-      ],
-    },
-
-    "ios-swift-separate-enums": {
-      transformGroup: "ios-swift-separate",
-      buildPath: "build/ios-swift/",
-      files: [
-        {
-          destination: "StyleDictionaryColor.swift",
-          format: "ios-swift/enum.swift",
-          className: "StyleDictionaryColor",
-          filter: {
-            type: "color",
-          },
-        },
-        {
-          destination: "StyleDictionarySize.swift",
-          format: "ios-swift/enum.swift",
-          className: "StyleDictionarySize",
-          type: "float",
-          filter: {
-            type: "number",
           },
         },
       ],
