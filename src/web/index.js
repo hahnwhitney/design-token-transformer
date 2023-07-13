@@ -18,7 +18,9 @@ module.exports = {
       'web/padding',
       'web/font',
       'web/gradient',
-      'color/hex8ToRgba'
+      // Do not transform color from hex to rgba;
+      // FastStore colors are formatted as hex
+      // 'color/hex8ToRgba'
     ])
   },
   format: {
