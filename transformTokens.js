@@ -1,7 +1,6 @@
 const StyleDictionary = require('style-dictionary')
 const deepMerge = require("deepmerge");
 const webConfig = require('./src/web/index.js')
-const androidConfig = require("./src/android/index.js");
 
 StyleDictionary.registerTransform({
   name: 'size/px',
@@ -43,7 +42,7 @@ StyleDictionary.registerFilter({
 })
 
 const StyleDictionaryExtended = StyleDictionary.extend({
-  ...deepMerge.all([androidConfig, webConfig]),
+  ...deepMerge.all([webConfig]),
   source: ["tokens/*.json"],
   platforms: {
     // For now, we're only exporting our tokens as vanilla CSS;
